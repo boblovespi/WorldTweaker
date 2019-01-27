@@ -1,33 +1,34 @@
 package boblovespi.worldtweaker.builders;
 
+import boblovespi.worldtweaker.conditions.ItemCondition;
 import boblovespi.worldtweaker.conditions.TimeCondition;
-import boblovespi.worldtweaker.crafttweaker.ITrigger;
-import boblovespi.worldtweaker.crafttweaker.ITriggerBuilder;
-import boblovespi.worldtweaker.crafttweaker.TimeRange;
-import boblovespi.worldtweaker.crafttweaker.ICondition;
-import boblovespi.worldtweaker.crafttweaker.IResult;
+import boblovespi.worldtweaker.crafttweaker.*;
 import boblovespi.worldtweaker.results.ItemDropResult;
-import boblovespi.worldtweaker.triggers.ExplosionTrigger;
+import boblovespi.worldtweaker.triggers.ItemExplosionTrigger;
 import boblovespi.worldtweaker.util.ConditionUtils;
 import boblovespi.worldtweaker.util.Transformers;
+import crafttweaker.api.item.IIngredient;
 import crafttweaker.api.item.IItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Willi on 1/22/2019.
+ * Created by Willi on 1/23/2019.
  */
-public class ExplosionTriggerBuilder implements ITriggerBuilder
+public class ItemExplosionTriggerBuilder implements ITriggerBuilder
 {
+	private final IIngredient target;
 	private IResult result;
 	private List<ICondition> globalConditions;
 	private List<ICondition> conditions;
 
-	public ExplosionTriggerBuilder()
+	public ItemExplosionTriggerBuilder(IIngredient target)
 	{
+		this.target = target;
 		conditions = new ArrayList<>(20);
 		globalConditions = new ArrayList<>(20);
+		conditions.add(new ItemCondition(target));
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class ExplosionTriggerBuilder implements ITriggerBuilder
 	{
 		conditions.sort(ConditionUtils::compare);
 		globalConditions.sort(ConditionUtils::compare);
-		return new ExplosionTrigger(
+		return new ItemExplosionTrigger(
 				result, globalConditions.toArray(new ICondition[0]), conditions.toArray(new ICondition[0]));
 	}
 

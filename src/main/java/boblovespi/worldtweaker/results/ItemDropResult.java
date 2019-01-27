@@ -7,8 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import java.util.List;
-
 /**
  * Created by Willi on 1/22/2019.
  */
@@ -22,7 +20,7 @@ public class ItemDropResult implements IResult
 	}
 
 	@Override
-	public void preformResult(World world, BlockPos pos, List<BlockPos> blocksAffected, List<Entity> entitiesAffected)
+	public void preformResult(World world, BlockPos pos, Entity target)
 	{
 		world.spawnEntity(new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack.copy()));
 	}

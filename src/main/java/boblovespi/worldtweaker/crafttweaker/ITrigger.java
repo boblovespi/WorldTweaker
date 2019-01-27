@@ -17,4 +17,6 @@ public interface ITrigger
 	IResult getResult();
 
 	ICondition[] getConditions();
+
+	ICondition[] getGlobalConditions();
 }

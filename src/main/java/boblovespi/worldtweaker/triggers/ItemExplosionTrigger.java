@@ -1,25 +1,20 @@
 package boblovespi.worldtweaker.triggers;
 
-import boblovespi.worldtweaker.crafttweaker.ITrigger;
 import boblovespi.worldtweaker.crafttweaker.ICondition;
-import boblovespi.worldtweaker.handler.ExplosionHandler;
 import boblovespi.worldtweaker.crafttweaker.IResult;
+import boblovespi.worldtweaker.crafttweaker.ITrigger;
+import boblovespi.worldtweaker.handler.ExplosionHandler;
 
 /**
- * Created by Willi on 1/22/2019.
+ * Created by Willi on 1/23/2019.
  */
-public class ExplosionTrigger implements ITrigger
+public class ItemExplosionTrigger implements ITrigger
 {
 	private final IResult result;
-	private final ICondition[] conditions;
 	private final ICondition[] globalConditions;
+	private final ICondition[] conditions;
 
-	public ExplosionTrigger(IResult result, ICondition... conditions)
-	{
-		this(result, new ICondition[0], conditions);
-	}
-
-	public ExplosionTrigger(IResult result, ICondition[] globalConditions, ICondition... conditions)
+	public ItemExplosionTrigger(IResult result, ICondition[] globalConditions, ICondition[] conditions)
 	{
 		this.result = result;
 		this.globalConditions = globalConditions;
@@ -29,10 +24,11 @@ public class ExplosionTrigger implements ITrigger
 	@Override
 	public ITrigger register(String name)
 	{
-		ExplosionHandler.register(name, this);
+		ExplosionHandler.registerItem(name, this);
 		return this;
 	}
 
+	@Override
 	public IResult getResult()
 	{
 		return result;
